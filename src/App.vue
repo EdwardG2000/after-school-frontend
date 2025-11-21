@@ -1,3 +1,36 @@
+<template>
+  <div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <h1 class="app-title">After-School Classes Booking</h1>
+
+      <button class="cart-btn" @click="toggleCart">
+        Cart ({{ cart.length }})
+      </button>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+      <!-- Show Lessons -->
+      <Lessons 
+        v-if="showLessons" 
+        :lessons="sortedLessons" 
+        @add-to-cart="addToCart"
+      />
+
+      <!-- Show Cart -->
+      <ShoppingCart
+        v-else
+        :cart="cart"
+        @remove="removeFromCart"
+        @checkout="checkout"
+      />
+    </div>
+  </div>
+</template>
+
 <script>
 import Lessons from './components/Lessons.vue'
 import ShoppingCart from './components/ShoppingCart.vue'
@@ -73,3 +106,43 @@ export default {
   },
 }
 </script>
+
+<style>
+/* NAVBAR */
+.navbar {
+  background: #1e3a8a; /* Deep blue */
+  color: white;
+  padding: 18px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* CART BUTTON */
+.cart-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.15s ease;
+}
+
+.cart-btn:hover {
+  background: #2563eb;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  max-width: 900px;
+  margin: 25px auto;
+}
+</style>
