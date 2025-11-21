@@ -1,31 +1,52 @@
 <template>
-  <div class="lessons-wrapper">
+ <template>
+  <div>
     <div 
       v-for="lesson in lessons" 
       :key="lesson._id" 
       class="lesson-card"
     >
-      <h3 class="lesson-title">{{ lesson.subject }}</h3>
+      <img :src="lesson.image" class="lesson-image" alt="Lesson image" />
 
-      <p class="lesson-detail">
-        <strong>Location:</strong> {{ lesson.location }}
-      </p>
-      <p class="lesson-detail">
-        <strong>Price:</strong> £{{ lesson.price }}
-      </p>
-      <p class="lesson-detail">
-        <strong>Spaces left:</strong> {{ lesson.spaces }}
-      </p>
+      <h3>{{ lesson.subject }}</h3>
+      <p>Location: {{ lesson.location }}</p>
+      <p>Price: £{{ lesson.price }}</p>
+      <p>Spaces left: {{ lesson.spaces }}</p>
 
       <button 
-        class="add-btn"
         @click="$emit('add-to-cart', lesson)" 
         :disabled="lesson.spaces === 0"
       >
-        {{ lesson.spaces === 0 ? "Sold Out" : "Add to Cart" }}
+        Add to Cart
       </button>
     </div>
   </div>
+</template>
+
+<script>
+export default {
+  props: ["lessons"],
+};
+</script>
+
+<style>
+.lesson-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.lesson-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+</style>
 </template>
 
 <script>
@@ -98,5 +119,21 @@ export default {
 .add-btn:disabled {
   background: #b3b3b3;
   cursor: not-allowed;
+}
+.lesson-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.lesson-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 </style>
