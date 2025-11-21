@@ -1,23 +1,28 @@
 <template>
- <template>
-  <div>
-    <div 
-      v-for="lesson in lessons" 
-      :key="lesson._id" 
+  <div class="lessons-wrapper">
+    <div
+      v-for="lesson in lessons"
+      :key="lesson._id"
       class="lesson-card"
     >
-      <img :src="lesson.image" class="lesson-image" alt="Lesson image" />
+      <img
+        v-if="lesson.image"
+        :src="lesson.image"
+        :alt="`${lesson.subject} class image`"
+        class="lesson-image"
+      />
 
-      <h3>{{ lesson.subject }}</h3>
-      <p>Location: {{ lesson.location }}</p>
-      <p>Price: £{{ lesson.price }}</p>
-      <p>Spaces left: {{ lesson.spaces }}</p>
+      <h3 class="lesson-title">{{ lesson.subject }}</h3>
+      <p class="lesson-detail"><strong>Location:</strong> {{ lesson.location }}</p>
+      <p class="lesson-detail"><strong>Price:</strong> £{{ lesson.price }}</p>
+      <p class="lesson-detail"><strong>Spaces left:</strong> {{ lesson.spaces }}</p>
 
-      <button 
-        @click="$emit('add-to-cart', lesson)" 
+      <button
+        class="add-btn"
+        @click="$emit('add-to-cart', lesson)"
         :disabled="lesson.spaces === 0"
       >
-        Add to Cart
+        {{ lesson.spaces === 0 ? 'Full' : 'Add to Cart' }}
       </button>
     </div>
   </div>
@@ -25,55 +30,30 @@
 
 <script>
 export default {
-  props: ["lessons"],
+  name: "Lessons",
+  props: {
+    lessons: {
+      type: Array,
+      required: true,
+    },
+  },
 };
 </script>
 
-<style>
-.lesson-card {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 15px;
-  background: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.lesson-image {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-</style>
-</template>
-
-<script>
-export default {
-  props: ['lessons']
-}
-</script>
-
-<style>
-/* Outer wrapper to center layout */
+<style scoped>
 .lessons-wrapper {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Modern card styling */
+/* Card styling */
 .lesson-card {
   background: #ffffff;
   border-radius: 14px;
   padding: 20px;
   margin-bottom: 20px;
-
-  /* soft shadow */
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
-
-  /* hover animation */
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -82,24 +62,32 @@ export default {
   box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.12);
 }
 
-/* Title Styling */
+/* Image styling */
+.lesson-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+/* Title & text */
 .lesson-title {
   font-size: 1.35rem;
   font-weight: 700;
   color: #1a1a1a;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
-/* Text styling */
 .lesson-detail {
-  margin: 5px 0;
+  margin: 4px 0;
   font-size: 0.95rem;
   color: #444;
 }
 
 /* Button styling */
 .add-btn {
-  background: #3b82f6; /* blue */
+  background: #3b82f6;
   color: white;
   border: none;
   padding: 10px 18px;
@@ -110,30 +98,12 @@ export default {
   transition: background 0.15s ease;
 }
 
-/* Hover */
 .add-btn:hover {
   background: #2563eb;
 }
 
-/* Disabled button */
 .add-btn:disabled {
   background: #b3b3b3;
   cursor: not-allowed;
-}
-.lesson-card {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 15px;
-  background: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.lesson-image {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
 }
 </style>
