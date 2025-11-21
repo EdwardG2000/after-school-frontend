@@ -5,6 +5,7 @@
       :key="lesson._id"
       class="lesson-card"
     >
+      <!-- Image -->
       <img
         v-if="lesson.image"
         :src="lesson.image"
@@ -12,17 +13,25 @@
         class="lesson-image"
       />
 
+      <!-- Text content -->
       <h3 class="lesson-title">{{ lesson.subject }}</h3>
-      <p class="lesson-detail"><strong>Location:</strong> {{ lesson.location }}</p>
-      <p class="lesson-detail"><strong>Price:</strong> £{{ lesson.price }}</p>
-      <p class="lesson-detail"><strong>Spaces left:</strong> {{ lesson.spaces }}</p>
+      <p class="lesson-detail">
+        <strong>Location:</strong> {{ lesson.location }}
+      </p>
+      <p class="lesson-detail">
+        <strong>Price:</strong> £{{ lesson.price }}
+      </p>
+      <p class="lesson-detail">
+        <strong>Spaces left:</strong> {{ lesson.spaces }}
+      </p>
 
+      <!-- Button -->
       <button
         class="add-btn"
         @click="$emit('add-to-cart', lesson)"
         :disabled="lesson.spaces === 0"
       >
-        {{ lesson.spaces === 0 ? 'Full' : 'Add to Cart' }}
+        {{ lesson.spaces === 0 ? "Full" : "Add to Cart" }}
       </button>
     </div>
   </div>
