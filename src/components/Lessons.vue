@@ -1,39 +1,45 @@
 <template>
-  <div class="lessons-wrapper">
-    <div
+  <div class="lessons-grid">
+    <article
       v-for="lesson in lessons"
       :key="lesson._id"
       class="lesson-card"
     >
-      <!-- Image -->
-      <img
-        v-if="lesson.image"
-        :src="lesson.image"
-        :alt="`${lesson.subject} class image`"
-        class="lesson-image"
-      />
+      <div class="lesson-media">
+        <img
+          v-if="lesson.image"
+          :src="lesson.image"
+          :alt="`${lesson.subject} class image`"
+        />
+        <div v-else class="image-placeholder">
+          <span>{{ lesson.subject }}</span>
+        </div>
+        <div class="lesson-tags">
+          <span class="pill price-pill">£{{ lesson.price }}</span>
+          <span
+            class="pill spaces-pill"
+            :class="{ full: lesson.spaces === 0 }"
+          >
+            {{ lesson.spaces === 0 ? 'Full' : `${lesson.spaces} spaces` }}
+          </span>
+        </div>
+      </div>
 
-      <!-- Text content -->
-      <h3 class="lesson-title">{{ lesson.subject }}</h3>
-      <p class="lesson-detail">
-        <strong>Location:</strong> {{ lesson.location }}
-      </p>
-      <p class="lesson-detail">
-        <strong>Price:</strong> £{{ lesson.price }}
-      </p>
-      <p class="lesson-detail">
-        <strong>Spaces left:</strong> {{ lesson.spaces }}
-      </p>
+      <div class="lesson-body">
+        <div class="lesson-heading">
+          <h3>{{ lesson.subject }}</h3>
+          <p class="lesson-location">{{ lesson.location }}</p>
+        </div>
 
-      <!-- Button -->
-      <button
-        class="add-btn"
-        @click="$emit('add-to-cart', lesson)"
-        :disabled="lesson.spaces === 0"
-      >
-        {{ lesson.spaces === 0 ? "Full" : "Add to Cart" }}
-      </button>
-    </div>
+        <button
+          class="add-btn"
+          @click="$emit('add-to-cart', lesson)"
+          :disabled="lesson.spaces === 0"
+        >
+          {{ lesson.spaces === 0 ? 'Join waitlist' : 'Add to cart' }}
+        </button>
+      </div>
+    </article>
   </div>
 </template>
 
@@ -50,69 +56,131 @@ export default {
 </script>
 
 <style scoped>
-.lessons-wrapper {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
+.lessons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
 }
 
-/* Card styling */
 .lesson-card {
-  background: #ffffff;
-  border-radius: 14px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.08), rgba(18, 28, 72, 0.85));
+  border-radius: 32px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 25px 60px rgba(2, 7, 26, 0.45);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .lesson-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 35px 80px rgba(5, 12, 30, 0.65);
 }
 
-/* Image styling */
-.lesson-image {
+.lesson-media {
+  position: relative;
+  min-height: 180px;
+}
+
+.lesson-media img {
   width: 100%;
-  height: 160px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 12px;
+  display: block;
 }
 
-/* Title & text */
-.lesson-title {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 8px;
-}
-
-.lesson-detail {
-  margin: 4px 0;
-  font-size: 0.95rem;
-  color: #444;
-}
-
-/* Button styling */
-.add-btn {
-  background: #3b82f6;
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 12px;
+.image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, rgba(82, 230, 255, 0.4), rgba(18, 28, 72, 0.9));
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 600;
-  transition: background 0.15s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.lesson-tags {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.pill {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+.price-pill {
+  background: rgba(255, 255, 255, 0.15);
+  color: #f9fbff;
+}
+
+.spaces-pill {
+  background: rgba(76, 225, 161, 0.2);
+  color: #78ffcf;
+}
+
+.spaces-pill.full {
+  background: rgba(255, 99, 132, 0.3);
+  color: #ffc2d1;
+}
+
+.lesson-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.lesson-heading h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: #f8fbff;
+}
+
+.lesson-location {
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.lesson-meta {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.add-btn {
+  margin-top: auto;
+  background: linear-gradient(120deg, #4c7dff, #52e6ff);
+  color: #031432;
+  border: none;
+  border-radius: 18px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .add-btn:hover {
-  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 18px 30px rgba(82, 230, 255, 0.35);
 }
 
 .add-btn:disabled {
-  background: #b3b3b3;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
   cursor: not-allowed;
+  box-shadow: none;
 }
 </style>

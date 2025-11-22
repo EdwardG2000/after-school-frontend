@@ -110,28 +110,29 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: rgba(255, 255, 255, 0.92);
-  padding: 22px;
-  border-radius: 22px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    0 25px 50px rgba(15, 23, 42, 0.12);
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(4, 8, 26, 0.85);
+  padding: 24px;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 50px rgba(2, 7, 26, 0.55);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .book-heading h3 {
   margin: 0;
   font-size: 1.35rem;
+  color: #f8fbff;
 }
 
 .book-subtitle {
   margin: 4px 0 0;
-  color: #475569;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.95rem;
 }
 
 label {
   font-weight: 600;
-  color: #0f172a;
+  color: rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -140,20 +141,25 @@ label {
 
 input,
 select {
-  border-radius: 12px;
-  border: 1px solid rgba(15, 23, 42, 0.15);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   padding: 12px 14px;
   font-size: 0.95rem;
   font-family: inherit;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fbff;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
 }
 
 input:focus,
 select:focus {
   outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  border-color: rgba(99, 213, 255, 0.8);
+  box-shadow: 0 0 0 2px rgba(82, 230, 255, 0.25);
 }
 
 .details-grid {
@@ -168,49 +174,50 @@ select:focus {
 }
 
 .summary-card {
-  background: rgba(14, 165, 233, 0.12);
-  border-radius: 16px;
-  border: 1px solid rgba(14, 165, 233, 0.35);
+  background: rgba(83, 130, 255, 0.12);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 16px;
 }
 
 .summary-card .booking-summary {
   margin: 0;
   font-size: 1rem;
-  color: #0f172a;
+  color: #f8fbff;
   font-weight: 600;
 }
 
 .summary-caption {
   margin: 6px 0 0;
   font-size: 0.9rem;
-  color: #0f172a;
+  color: rgba(255, 255, 255, 0.7);
   opacity: 0.8;
 }
 
 button {
   margin-top: 4px;
-  background: linear-gradient(135deg, #1d4ed8, #2563eb);
-  color: white;
+  background: linear-gradient(120deg, #4c7dff, #52e6ff);
+  color: #06102c;
   border: none;
   border-radius: 999px;
-  padding: 12px;
+  padding: 14px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 12px 24px rgba(82, 230, 255, 0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:disabled {
   cursor: not-allowed;
-  background: #94a3b8;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
   box-shadow: none;
 }
 
 button:not(:disabled):hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 32px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 18px 32px rgba(82, 230, 255, 0.5);
 }
 
 @media (max-width: 600px) {
