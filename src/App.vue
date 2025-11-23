@@ -104,6 +104,12 @@ import BookingForm from './components/BookingForm.vue'
 
 const LESSONS_ENDPOINT = 'https://after-school-backend-3da9.onrender.com/lessons'
 const ORDERS_ENDPOINT = 'https://after-school-backend-3da9.onrender.com/orders'
+const LESSON_IMAGES = {
+  coding: 'public/coding image .png',
+  english: 'public/english image.png',
+  math: 'public/mathsimage.png',
+  science: 'public/science image.png',
+}
 
 export default {
   components: { Lessons, ShoppingCart, BookingForm },
@@ -161,7 +167,15 @@ export default {
       try {
         const response = await fetch(LESSONS_ENDPOINT)
         if (!response.ok) throw new Error('Failed to load lessons.')
-        this.lessons = await response.json()
+        const lessons = await response.json()
+        this.lessons = lessons.map((lesson) => {
+          const subjectKey = (lesson.subject || '').trim().toLowerCase()
+          const localImage = LESSON_IMAGES[subjectKey]
+          return {
+            ...lesson,
+            image: localImage || lesson.image,
+          }
+        })
         this.fetchError = ''
       } catch (error) {
         console.error(error)

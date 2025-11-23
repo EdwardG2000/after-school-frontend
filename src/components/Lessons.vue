@@ -120,18 +120,18 @@ export default {
 }
 
 .price-pill {
-  background: rgba(255, 255, 255, 0.15);
-  color: #f9fbff;
+  background: rgba(72, 111, 255, 0.95);
+  color: #f5f7ff;
 }
 
 .spaces-pill {
-  background: rgba(76, 225, 161, 0.2);
-  color: #78ffcf;
+  background: rgba(45, 212, 191, 0.92);
+  color: #022c22;
 }
 
 .spaces-pill.full {
-  background: rgba(255, 99, 132, 0.3);
-  color: #ffc2d1;
+  background: rgba(244, 63, 94, 0.9);
+  color: #fff5f7;
 }
 
 .lesson-body {
