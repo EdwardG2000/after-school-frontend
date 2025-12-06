@@ -253,7 +253,6 @@ export default {
 </script>
 
 
-
 <style>
 :root {
   font-family: 'Inter', 'SF Pro Display', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -262,6 +261,7 @@ export default {
   color: #e2e8f0;
   background-color: #030715;
 }
+
 
 *,
 *::before,
